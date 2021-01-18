@@ -1,0 +1,22 @@
+{
+  "name": "42leaks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzodFR/42Leaks.git"
+  },
+  "author": "Azod",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AzodFR/42Leaks/issues"
+  },
+  "homepage": "https://github.com/AzodFR/42Leaks#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
