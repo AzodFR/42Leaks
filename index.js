@@ -48,7 +48,7 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		{
 			newState.guild.channels.create("Among US", {
 				type: 'voice',
-				userLimit: 10,
+				userLimit: limit,
 				parent: newState.channel.parent,
 				position: 1
 			}).then(chan => {
