@@ -23,16 +23,28 @@ client.on('message', message => {
 client.on('voiceStateUpdate', function(oldState, newState){
 	if (newState.channelID == "804428631429742683")
 	{
-		newState.guild.channels.create("Among US", {
-			type: 'voice',
-			userLimit: 10,
-			parent: newState.channel.parent,
-			position: 1
-		}).then(chan => {
-				newState.member.voice.setChannel(chan);
-				tournament.push(chan.id);
-				chan.setName(`Among US #${tournament.length}`)
-			});
+		var joinded = 0;
+		tournament.forEach(function(item, index, array) {
+			var exist = newState.guild.channels.cache.get(ch => ch.id == item);
+			if (exist.joinable)
+			{
+				newState.member.voice.setChannel(exist);
+				joined = 1;
+			}
+		});
+		if (!joined)
+		{
+			newState.guild.channels.create("Among US", {
+				type: 'voice',
+				userLimit: 10,
+				parent: newState.channel.parent,
+				position: 1
+			}).then(chan => {
+					newState.member.voice.setChannel(chan);
+					tournament.push(chan.id);
+					chan.setName(`Among US #${tournament.length}`)
+				});
+		}
 	}
 	else
 	{
