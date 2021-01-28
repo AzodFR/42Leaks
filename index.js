@@ -27,12 +27,15 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		if (tournament.length)
 		{
 			tournament.forEach(function(item, index, array) {
-				var exist = newState.guild.channels.cache.get(ch => ch.id == item);
-				if (exist.joinable)
-				{
-					newState.member.voice.setChannel(exist);
-					joined = 1;
-				}
+				console.log(item);
+				newState.guild.channels.cache.get(item).then(exist => {
+					console.log(exist);
+					if (exist.joinable)
+					{
+						newState.member.voice.setChannel(exist);
+						joined = 1;
+					}
+				});
 			});
 		}
 		if (!joined)
