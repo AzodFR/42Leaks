@@ -56,7 +56,9 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		tournament.forEach(function(item, index, array) {
 			if (item == oldState.channelID)
 			{
-				if (oldState.channel.members.array.length == 0)
+				console.log(oldState.channel.members.array.length)
+				console.log(oldState.channel.members.array)
+				if (oldState.channel.members.size == 0)
 				{
 					oldState.channel.delete();
 					tournament.splice(index, 1);
