@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 
 const client = new Discord.Client();
 
+var tournament = [];
+
 client.once('ready', () => {
 	console.log("42Leaks is ready !");
 	client.user.setActivity(`Votez Leaks !`);
@@ -24,8 +26,26 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		newState.guild.channels.create("Among US", {
 			type: 'voice',
 			userLimit: 10,
-			position: 16
-		}).then(chan => newState.member.voice.setChannel(chan));
+			parent: newState.channel.parent,
+			position: 1
+		}).then(chan => {
+				newState.member.voice.setChannel(chan);
+				tournament.push(chan.id);
+				chan.setName(`Among US #${tournament.length}`)
+			});
+	}
+	else
+	{
+		tournament.forEach(function(item, index, array) {
+			if (item == oldState.channelID)
+			{
+				if (oldState.channel.members.array.length == 0)
+				{
+					oldState.channel.delete();
+					tournament.splice(index, 1);
+				}
+			}
+		})
 	}
 	
 });
