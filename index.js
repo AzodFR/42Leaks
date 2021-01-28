@@ -27,10 +27,8 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		if (tournament.length)
 		{
 			tournament.forEach(function(item, index, array) {
-				console.log(item);
 				let exist = newState.guild.channels.cache.get(item)
-					console.log(exist);
-					if (exist.joinable)
+					if (exist.members.size < exist.userLimit)
 					{
 						newState.member.voice.setChannel(exist);
 						joined = 1;
@@ -56,8 +54,6 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		tournament.forEach(function(item, index, array) {
 			if (item == oldState.channelID)
 			{
-				console.log(oldState.channel.members.array.length)
-				console.log(oldState.channel.members.array)
 				if (oldState.channel.members.size == 0)
 				{
 					oldState.channel.delete();
