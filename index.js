@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var tournament = [];
+var limit = 10;
 
 client.once('ready', () => {
 	console.log("42Leaks is ready !");
@@ -17,6 +18,14 @@ client.on('message', message => {
 		message.react("🤷‍♂️");
 		message.react("👎");
 		return ;
+	}
+	else if (message.member.permissions.has("MANAGE_CHANNELS"))
+	{
+		if (message.content.startsWith("/setlimit"))
+		{
+			limit = parseInt(message.content.slice(10));
+			message.reply(`The new limit is ${limit} users`);
+		}
 	}
 })
 
