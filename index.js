@@ -18,4 +18,15 @@ client.on('message', message => {
 	}
 })
 
+client.on('voiceStateUpdate', function(oldState, newState){
+	if (newState.channelID == "804428631429742683")
+	{
+		newState.guild.channels.create("Among US", {
+			type: 'voice',
+			userLimit: 10
+		}).then(chan => newState.member.voice.setChannel(chan));
+	}
+	
+});
+
 client.login(process.env.BOT_TOKEN);
