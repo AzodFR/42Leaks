@@ -24,14 +24,17 @@ client.on('voiceStateUpdate', function(oldState, newState){
 	if (newState.channelID == "804428631429742683")
 	{
 		var joined = 0;
-		tournament.forEach(function(item, index, array) {
-			var exist = newState.guild.channels.cache.get(ch => ch.id == item);
-			if (exist.joinable)
-			{
-				newState.member.voice.setChannel(exist);
-				joined = 1;
-			}
-		});
+		if (tournament.length)
+		{
+			tournament.forEach(function(item, index, array) {
+				var exist = newState.guild.channels.cache.get(ch => ch.id == item);
+				if (exist.joinable)
+				{
+					newState.member.voice.setChannel(exist);
+					joined = 1;
+				}
+			});
+		}
 		if (!joined)
 		{
 			newState.guild.channels.create("Among US", {
