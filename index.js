@@ -29,17 +29,21 @@ client.on('message', message => {
 		else if (message.content.startsWith("/randomize"))
 		{
 			var keeper = [];
+			message.reply("let's randomize this !")
 			tournament.forEach(function(item, index, array) {
 				keeper[index] = 0;
+				console.log(`${index} -> ${keeper[index]}`);
 			})
 			tournament.forEach(function(item, index, array) {
 				message.guild.channels.cache.get(item).members.each(function(mem) {
 					var newc = getRandomInt(tournament.length + 1) - 1;
-					while (newc == index && keeper[index] == limit)
+					console.log(`GET NEW: ${newc}`);
+					while (newc == index && keeper[newc] == limit)
 					{
 						var newc = getRandomInt(tournament.length + 1) - 1;
 					}
-					keeper[index]++;
+					keeper[newc]++;
+					console.log(`${newc} -> ${keeper[newc]}`);
 					mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
 			})
