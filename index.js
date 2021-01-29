@@ -11,7 +11,7 @@ client.once('ready', () => {
 	client.user.setActivity(`Votez Leaks !`);
 })
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (message.author.bot) return ;
 	if (message.channel.id === "800678489334349884")
 	{
@@ -42,12 +42,12 @@ client.on('message', message => {
 					console.log(`GET NEW: ${newc}`);
 					while (newc == index || keeper[newc] == limit)
 					{
-						console.log(`GET NEW: ${newc}`);
 						var newc = getRandomInt(tournament.length);
+						console.log(`RETRY: ${newc}`);
 					}
 					keeper[newc]++;
 					console.log(`${newc} -> ${keeper[newc]}`);
-					mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
+					await mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
 			})
 			noquit = 0
