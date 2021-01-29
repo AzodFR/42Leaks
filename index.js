@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 var tournament = [];
-var limit = 10;
+var limit = 1;
 var noquit = 0;
 
 client.once('ready', () => {
