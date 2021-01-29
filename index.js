@@ -4,6 +4,7 @@ const client = new Discord.Client();
 
 var tournament = [];
 var limit = 10;
+var noquit = 0;
 
 client.once('ready', () => {
 	console.log("42Leaks is ready !");
@@ -28,6 +29,7 @@ client.on('message', message => {
 		}
 		else if (message.content.startsWith("/randomize"))
 		{
+			noquit = 1;
 			var keeper = [];
 			message.reply("let's randomize this !")
 			tournament.forEach(function(item, index, array) {
@@ -47,6 +49,7 @@ client.on('message', message => {
 					mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
 			})
+			noquit = 0
 		}
 	}
 })
@@ -80,7 +83,7 @@ client.on('voiceStateUpdate', function(oldState, newState){
 				});
 		}
 	}
-	else
+	else if (!noquit)
 	{
 		tournament.forEach(function(item, index, array) {
 			if (item == oldState.channelID)
