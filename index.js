@@ -40,9 +40,9 @@ client.on('message', message => {
 				message.guild.channels.cache.get(item).members.each(function(mem) {
 					var newc = getRandomInt(tournament.length - 1);
 					console.log(`GET NEW: ${newc}`);
-					while (newc == index && keeper[newc] == limit)
+					while (newc == index || keeper[newc] == limit)
 					{
-						var newc = getRandomInt(tournament.length + 1) - 1;
+						var newc = getRandomInt(tournament.length - 1);
 					}
 					keeper[newc]++;
 					console.log(`${newc} -> ${keeper[newc]}`);
@@ -85,6 +85,7 @@ client.on('voiceStateUpdate', function(oldState, newState){
 	}
 	else if (!noquit)
 	{
+		console.log(`noquit: ${noquit}`)
 		tournament.forEach(function(item, index, array) {
 			if (item == oldState.channelID)
 			{
