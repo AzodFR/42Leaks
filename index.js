@@ -50,9 +50,8 @@ client.on('message', async message => {
 					await mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
 			})
-		}
-		else if (message.content.startsWith("/p"))
 			noquit = 0;
+		}
 	}
 })
 
