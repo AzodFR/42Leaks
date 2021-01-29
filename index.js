@@ -42,6 +42,7 @@ client.on('message', message => {
 					console.log(`GET NEW: ${newc}`);
 					while (newc == index || keeper[newc] == limit)
 					{
+						console.log(`GET NEW: ${newc}`);
 						var newc = getRandomInt(tournament.length);
 					}
 					keeper[newc]++;
@@ -89,7 +90,7 @@ client.on('voiceStateUpdate', function(oldState, newState){
 		tournament.forEach(function(item, index, array) {
 			if (item == oldState.channelID)
 			{
-				if (oldState.channel.members.size == 0)
+				if (oldState.guild.channels.cache.get(oldState.channelID).members.size == 0)
 				{
 					oldState.channel.delete();
 					tournament.splice(index, 1);
