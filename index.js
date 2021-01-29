@@ -36,8 +36,8 @@ client.on('message', async message => {
 				keeper[index] = 0;
 				console.log(`${index} -> ${keeper[index]}`);
 			})
-			tournament.forEach(function(item, index, array) {
-				message.guild.channels.cache.get(item).members.each(function(mem) {
+			tournament.forEach(async function(item, index, array) {
+				message.guild.channels.cache.get(item).members.each(async function(mem) {
 					var newc = getRandomInt(tournament.length);
 					console.log(`GET NEW: ${newc}`);
 					while (newc == index || keeper[newc] == limit)
