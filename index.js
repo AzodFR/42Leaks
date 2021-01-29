@@ -34,23 +34,21 @@ client.on('message', async message => {
 			message.reply("let's randomize this !")
 			await tournament.forEach(function(item, index, array) {
 				keeper[index] = 0;
-				console.log(`${index} -> ${keeper[index]}`);
 			})
 			await tournament.forEach(async function(item, index, array) {
-				message.guild.channels.cache.get(item).members.each(async function(mem) {
+				await message.guild.channels.cache.get(item).members.each(async function(mem) {
 					var newc = getRandomInt(tournament.length);
-					console.log(`GET NEW: ${newc}`);
 					while (newc == index || keeper[newc] == limit)
 					{
 						var newc = getRandomInt(tournament.length);
-						console.log(`RETRY: ${newc}`);
 					}
 					keeper[newc]++;
-					console.log(`${newc} -> ${keeper[newc]}`);
 					await mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
+				if (index = tournament.length - 1)
+					noquit = 0;
 			})
-			noquit = 0;
+			
 		}
 	}
 })
@@ -86,7 +84,6 @@ client.on('voiceStateUpdate', function(oldState, newState){
 	}
 	else if (!noquit)
 	{
-		console.log(`noquit: ${noquit}`)
 		tournament.forEach(function(item, index, array) {
 			if (item == oldState.channelID)
 			{
