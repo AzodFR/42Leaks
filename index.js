@@ -45,10 +45,11 @@ client.on('message', async message => {
 					keeper[newc]++;
 					await mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
-				if (index == tournament.length - 1)
-					noquit = 0;
 			})
-			
+		}
+		else if (message.content.startsWith("/p"))
+		{
+			noquit = 0;
 		}
 	}
 })
