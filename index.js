@@ -32,11 +32,11 @@ client.on('message', async message => {
 			noquit = 1;
 			var keeper = [];
 			message.reply("let's randomize this !")
-			tournament.forEach(function(item, index, array) {
+			await tournament.forEach(function(item, index, array) {
 				keeper[index] = 0;
 				console.log(`${index} -> ${keeper[index]}`);
 			})
-			tournament.forEach(async function(item, index, array) {
+			await tournament.forEach(async function(item, index, array) {
 				message.guild.channels.cache.get(item).members.each(async function(mem) {
 					var newc = getRandomInt(tournament.length);
 					console.log(`GET NEW: ${newc}`);
@@ -50,8 +50,9 @@ client.on('message', async message => {
 					await mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
 			})
-			noquit = 0
 		}
+		else if (message.content.startsWith("/p"))
+			noquit = 0;
 	}
 })
 
