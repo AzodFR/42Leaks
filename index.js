@@ -26,6 +26,24 @@ client.on('message', message => {
 			limit = parseInt(message.content.slice(10));
 			message.reply(`The new limit is ${limit} users`);
 		}
+		else if (message.content.startsWith("/randomize"))
+		{
+			var keeper = [];
+			tournament.forEach(function(item, index, array) {
+				keeper[index] = 0;
+			})
+			tournament.forEach(function(item, index, array) {
+				message.guild.channels.cache.get(item).members.each(function(mem) {
+					var newc = getRandomInt(tournament.length + 1) - 1;
+					while (newc == index && keeper[index] == limit)
+					{
+						var newc = getRandomInt(tournament.length + 1) - 1;
+					}
+					keeper[index]++;
+					mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
+				})
+			})
+		}
 	}
 })
 
@@ -75,3 +93,7 @@ client.on('voiceStateUpdate', function(oldState, newState){
 });
 
 client.login(process.env.BOT_TOKEN);
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
