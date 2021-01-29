@@ -31,7 +31,7 @@ client.on('message', async message => {
 		{
 			noquit = 1;
 			var keeper = [];
-			message.reply("let's randomize this !")
+			message.reply("let's randomize this ! (don't forget to /p after this)")
 			await tournament.forEach(function(item, index, array) {
 				keeper[index] = 0;
 			})
@@ -47,8 +47,9 @@ client.on('message', async message => {
 				})
 			})
 		}
-		else if (message.content.startsWith("/p"))
+		else if (message.content.startsWith("/p") && noquit)
 		{
+			message.reply("you can now play !");
 			noquit = 0;
 		}
 	}
