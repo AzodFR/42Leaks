@@ -38,11 +38,11 @@ client.on('message', message => {
 			})
 			tournament.forEach(function(item, index, array) {
 				message.guild.channels.cache.get(item).members.each(function(mem) {
-					var newc = getRandomInt(tournament.length - 1);
+					var newc = getRandomInt(tournament.length);
 					console.log(`GET NEW: ${newc}`);
 					while (newc == index || keeper[newc] == limit)
 					{
-						var newc = getRandomInt(tournament.length - 1);
+						var newc = getRandomInt(tournament.length);
 					}
 					keeper[newc]++;
 					console.log(`${newc} -> ${keeper[newc]}`);
