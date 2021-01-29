@@ -45,7 +45,7 @@ client.on('message', async message => {
 					keeper[newc]++;
 					await mem.voice.setChannel(message.guild.channels.cache.get(tournament[newc]))
 				})
-				if (index = tournament.length - 1)
+				if (index == tournament.length - 1)
 					noquit = 0;
 			})
 			
